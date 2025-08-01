@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Calificar Servicio</title>
+</head>
+<body>
+<h2>⭐ Califica tu experiencia</h2>
+<form th:action="@{/pedido/calificar}" method="post">
+  <input type="hidden" name="pedidoId" th:value="${pedidoId}">
+  <label>Puntaje:</label>
+  <select name="rating" required>
+    <option value="5">⭐⭐⭐⭐⭐</option>
+    <option value="4">⭐⭐⭐⭐</option>
+    <option value="3">⭐⭐⭐</option>
+    <option value="2">⭐⭐</option>
+    <option value="1">⭐</option>
+  </select>
+  <br>
+  <label>Comentarios:</label>
+  <textarea name="comentario" rows="4" cols="40"></textarea>
+  <br><br>
+  <button type="submit">Enviar</button>
+</form>
+</body>
+</html>

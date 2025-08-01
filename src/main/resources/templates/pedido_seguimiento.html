@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragmentos/header :: head"></head>
+<body>
+
+  <main>
+    <div class="seguimiento-container" th:if="${pedido != null}">
+      <h2>📦 Seguimiento de tu pedido</h2>
+
+      <div class="detalle"><strong>N.º Pedido:</strong> <span th:text="${pedido.id}"></span></div>
+      <div class="detalle"><strong>Cliente:</strong> <span th:text="${pedido.cliente}"></span></div>
+      <div class="detalle"><strong>Dirección:</strong> <span th:text="${pedido.direccion}"></span></div>
+      <div class="detalle"><strong>Contenido:</strong> <span th:text="${pedido.contenido}"></span></div>
+      <div class="detalle"><strong>Valor estimado:</strong> $<span th:text="${pedido.valor}"></span></div>
+      <div class="detalle"><strong>Asegurado:</strong> <span th:text="${pedido.asegurado ? 'Sí' : 'No'}"></span></div>
+      <div class="detalle"><strong>Estado:</strong> <span th:text="${pedido.estado}"></span></div>
+      <div class="detalle"><strong>Entrega estimada:</strong> <span th:text="${pedido.fechaEntrega}"></span></div>
+
+      <div class="acciones">
+        <a th:href="@{'/pedido/factura?id=' + ${pedido.id}}" class="btn">📄 Descargar factura</a>
+        <a href="#" class="btn">📤 Volver a enviar</a>
+<!-- Botón para abrir el modal -->
+<button type="button" class="btn" onclick="abrirModal()">📅 Reprogramar</button>
+
+<!-- Modal -->
+<div id="modalFecha" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+    <h3>Selecciona nueva fecha de entrega</h3>
+
+    <form id="formReprogramar" th:action="@{/pedido/reprogramar}" method="post" onsubmit="return validarFecha()">
+      <input type="hidden" name="id" th:value="${pedido.id}" />
+
+      <!-- Fecha actual de entrega como valor y min -->
+      <input type="date" id="nuevaFecha" name="fecha"
+             th:value="${pedido.fechaEntrega}" th:min="${pedido.fechaEntrega}" required />
+
+      <p id="mensajeTasa" style="color: red; font-weight: bold;"></p>
+      <br><br>
+      <button type="submit" class="btn">✔ Confirmar</button>
+    </form>
+  </div>
+</div>
+
+<br>
+<button class="btn cerrar-btn" onclick="cerrarModal()">❌ Cancelar</button>
+<a th:href="@{/}" class="btn" style="background-color: red;">🏠 Volver al inicio</a>
+
+<!-- Estilos -->
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-contenido {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .cerrar {
+    color: red;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+
+<!-- Script -->
+<script>
+  function abrirModal() {
+    document.getElementById("modalFecha").style.display = "block";
+    document.getElementById("mensajeTasa").textContent = "";
+  }
+
+  function cerrarModal() {
+    document.getElementById("modalFecha").style.display = "none";
+  }
+
+  function validarFecha() {
+    const input = document.getElementById("nuevaFecha");
+    const mensaje = document.getElementById("mensajeTasa");
+
+    const fechaSeleccionada = new Date(input.value);
+    const fechaMin = new Date(input.min);
+
+    const diff = (fechaSeleccionada - fechaMin) / (1000 * 60 * 60 * 24); // días de diferencia
+
+    if (diff < 0) {
+      alert("❌ No puedes seleccionar una fecha anterior a la actual de entrega.");
+      return false;
+    }
+
+    if (diff > 5) {
+      mensaje.textContent = "⚠️ Se aplicará una tasa adicional por cambio fuera de plazo.";
+    } else {
+      mensaje.textContent = "";
+    }
+
+    return true;
+  }
+
+  // Cerrar modal si se hace clic fuera
+  window.onclick = function(event) {
+    const modal = document.getElementById("modalFecha");
+    if (event.target === modal) {
+      cerrarModal();
+    }
+  }
+</script>
+
+
+        <a th:href="@{'/pedido/calificar?id=' + ${pedido.id}}" class="btn">⭐ Calificar servicio</a>
+      </div>
+    </div>
+
+    <div class="seguimiento-container mensaje-error" th:if="${pedido == null}">
+      <p>❌ No se encontró ningún pedido con ese identificador.</p>
+      <a th:href="@{/}" class="btn">Volver al inicio</a>
+    </div>
+  </main>
+
+  <div th:replace="fragmentos/footer :: pie"></div>
+
+</body>
+</html>

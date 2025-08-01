@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Reprogramar Entrega | PackExpress</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <main class="formulario">
+    <h1>Reprogramar Entrega</h1>
+    <form th:action="@{/pedido/reprogramar}" method="post">
+      <input type="hidden" name="id" th:value="${pedido.id}" />
+      <label>Nueva fecha:</label>
+      <input type="date" name="fecha" required>
+      <button type="submit">Actualizar</button>
+    </form>
+  </main>
+  <div th:replace="fragmentos/footer :: pie"></div>
+</body>
+</html>

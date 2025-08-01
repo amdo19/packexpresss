@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PackExpress | Tu pedido en tus manos</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <script th:src="@{/js/main.js}" defer></script>
+</head>
+<body>
+  <header class="header-principal" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img th:src="@{/images/logoexpress.jpg}" alt="Logo PackExpress" style="height: 50px;">
+      <h1 style="color: #ff6d00; font-size: 1.5rem; animation: fadeIn 1s ease-in-out;">PackExpress</h1>
+    </div>
+ <form th:action="@{/buscar}" method="get">
+  <input type="text" name="q" placeholder="Buscar servicios o entregas...">
+  <button type="submit">🔍</button>
+</form>
+  </button>
+</form>
+
+</form>
+
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <a th:if="${session.usuario == null}" th:href="@{/login}" style="color: #333; text-decoration: none; font-weight: 600;">Iniciar sesión</a>
+      <a th:if="${session.usuario != null}" th:href="@{/logout}" style="color: #333; text-decoration: none; font-weight: 600;">Cerrar sesión</a>
+      <a th:if="${session.usuario != null}" th:href="@{/perfil}" style="color: #333; text-decoration: none; font-weight: 600;">👤 Mi Perfil</a>
+    </div>
+  </header>
+
+  <main style="padding: 2rem; max-width: 1300px; margin: 0 auto;">
+    <section style="text-align: center;">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">¿Qué deseas hacer hoy?</h2>
+      <img th:src="@{/images/home.png}" alt="PackExpress" style="height: 500px;">
+      <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+        <div th:if="${session.usuario != null}">
+          <br>
+          <a th:href="@{/pedido/nuevo}" class="tile-btn">📦 Registrar Pedido</a>
+          <a th:href="@{/seguimiento?id=1}" class="tile-btn">🔍 Seguimiento</a>
+          <a th:href="@{/admin/pedidos}" class="tile-btn">🛠️ Panel Admin</a>
+        </div>
+        <div th:if="${session.usuario == null}">
+          <p>Inicia sesión para acceder a tus funcionalidades.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">¿Por qué elegir PackExpress?</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li>✅ Entregas rápidas en zonas rurales y urbanas.</li>
+        <li>✅ Seguro en cada pedido.</li>
+        <li>✅ Atención personalizada por WhatsApp.</li>
+        <li>✅ Seguimiento en tiempo real.</li>
+        <li>✅ Integración con comercios Temu.</li>
+      </ul>
+    </section>
+<section style="display: flex; justify-content: space-between; align-items: center; padding: 2rem;">
+  <div>
+    <h2>Tu paquete, a tiempo y seguro,<br>hasta tu puerta</h2>
+    <a href="/pedido/nuevo" class="btn" style="background-color: #ff6d00; color: white; padding: 0.8rem 1.5rem; border-radius: 5px;">Enviar un paquete</a>
+  </div>
+  <img src="/images/repartidor.png" alt="Repartidor" style="max-height: 200px;">
+</section>
+
+    <section style="margin-top: 3rem; background: #f9f9f9; padding: 2rem; border-radius: 1rem;">
+      <h3 class="section-title">Opiniones recientes</h3>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div class="animated-box">
+          <img src="/images/karla.jpg" alt="Repartidor" style="max-height: 200px;">
+          <p>⭐⭐⭐⭐⭐</p>
+          <p>"Increíble servicio, llegó antes de lo prometido."</p>
+          <p><strong>– Karla S.</strong></p>
+        </div>
+        <div class="animated-box">
+          <img src="/images/andres.jpeg" alt="Repartidor" style="max-height: 200px;">
+          <p>⭐⭐⭐⭐</p>
+          <p>"Muy buena atención al cliente, volveré a usarlo."</p>
+          <p><strong>– Andrés P.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Preguntas frecuentes</h3>
+      <details>
+        <summary>¿Qué zonas cubre PackExpress?</summary>
+        <p>Cubrimos todo Babahoyo, especialmente zonas  donde otros no llegan.</p>
+      </details>
+      <details>
+        <summary>¿Puedo reprogramar un pedido?</summary>
+        <p>Sí, desde el panel de seguimiento puedes hacerlo fácilmente.</p>
+      </details>
+      <details>
+        <summary>¿Cómo me comunico con atención al cliente?</summary>
+        <p>Haz clic en el botón de WhatsApp que flota en la esquina inferior derecha.</p>
+      </details>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Ubicación</h3>
+      <div style="width:100%;height:300px;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Estadísticas</h3>
+      <ul>
+        <li>📦 Pedidos entregados este mes: <strong>892</strong></li>
+        <li>🚚 Cobertura activa: <strong>92 zonas</strong></li>
+        <li>⭐ Valoración promedio: <strong>4.8 / 5</strong></li>
+      </ul>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Enlaces útiles</h3>
+      <ul style="display: flex; gap: 1rem; flex-wrap: wrap; list-style: none;">
+        <li><a th:href="@{/pedido/nuevo}" class="btn">Solicitar Pedido</a></li>
+        <a th:if="${pedido != null}" th:href="@{'/seguimiento?id=' + ${pedido.id}}">Ver seguimiento</a>
+
+        <li><a th:href="@{/admin/pedidos}" class="btn">Panel de Gestión</a></li>
+        <li><a href="mailto:info@packexpress.com" class="btn">Contáctanos</a></li>
+      </ul>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Tiendas recomendadas</h3>
+      <div class="store-grid">
+        <div class="store-card">
+          <img src="/images/tienda1.jpg" alt="Tienda de Electrónica">
+          <h4>ElectroFast</h4>
+          <p>Ofertas en tecnología y accesorios</p>
+          <a  class="btn">Visitar tienda</a>
+        </div>
+        <div class="store-card">
+          <img src="/images/tienda2.jpg" alt="Moda Urbana">
+          <h4>UrbanWear</h4>
+          <p>Ropa urbana con envíos 24h</p>
+          <a  class="btn">Ver productos</a>
+        </div>
+        <div class="store-card">
+          <img src="/images/tienda3.jpg" alt="Comida rápida">
+          <h4>BurgerGo</h4>
+          <p>Entregas express de tus hamburguesas favoritas</p>
+          <a  class="btn">Ordenar ahora</a>
+        </div>
+      </div>
+    </section>
+<section style="margin-top: 3rem;">
+  <h3 class="section-title">Promos de entrega para hoy</h3>
+  <div class="product-carousel">
+
+    <div class="product-card">
+      <img src="/images/envio.jpg" alt="Envío gratis">
+      <h4>🚚 Envío gratis a domicilio</h4>
+      <p>Haz tu pedido antes de las 14:00 y paga $0 en entrega.</p>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/trafico.png" alt="Descuento nocturno">
+      <h4> ¡No pierdas tiempo en el tráfico!</h4>
+      <p>Tú enfócate en vender y nosotros lo entregamos a tiempo. ¡Así de fácil! 📦 Carga, paquetería o papelería, lo que necesites mover, Pack Express lo hace por ti, rápido y con total confianza. <b></b>.</p>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/puerta.jpg" alt="2x1 entregas">
+      <h4>🚪➡️🚪 De puerta a puerta, sin complicaciones</h4>
+      <p>En Pack Express contamos con motoristas expertos que se encargan de llevar tus envíos a tiempo, directo al destino. ¡Somos la entrega perfecta! 🛵📦</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- WhatsApp con texto informativo -->
+<div class="whatsapp-contact">
+  <div class="whatsapp-text-box" id="whatsappText">
+    <span class="whatsapp-text">¿Necesitas ayuda? Escríbenos</span>
+    <button class="close-btn" onclick="cerrarWhatsappText()">×</button>
+  </div>
+  <a href="https://wa.me/+593939945724?text=Hola%20PackExpress,%20quiero%20información"
+     target="_blank" class="whatsapp-float" title="Habla con soporte">
+    <img src="/images/whatsapp.png" alt="WhatsApp">
+  </a>
+</div>
+
+  
+</div>
+<script>
+  function cerrarWhatsappText() {
+    const textBox = document.getElementById("whatsappText");
+    if (textBox) {
+      textBox.style.display = "none";
+    }
+  }
+</script>
+
+
+<footer class="footer-temu" th:replace="fragmentos/footer :: pie"></footer>
+</body>
+</html>

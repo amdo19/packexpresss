@@ -1,0 +1,153 @@
+/* ================= LOGIN STYLES ================= */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #ff6d00, #ffb300);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffe0b2, #fff3e0);
+}
+
+.card-3d-wrap {
+  width: 400px;
+  max-width: 100%;
+  height: 480px;
+  position: relative;
+  perspective: 1000px;
+  margin: auto;
+}
+
+.card-3d-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 30px;
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+h4 {
+  font-weight: 700;
+  color: #ff6d00;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.form-style {
+  padding: 13px 20px 13px 45px; /* antes: padding: 13px 20px; */
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #fdfdfd;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.form-style:focus {
+  border-color: #ff6d00;
+  outline: none;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #999;
+  pointer-events: none;
+}
+
+
+.btn {
+  background-color: #ff6d00;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #fb8c00;
+}
+
+.checkbox {
+  display: none;
+}
+
+label[for="reg-log"] {
+  display: block;
+  margin: 1rem auto;
+  cursor: pointer;
+  color: #555;
+  font-size: 14px;
+}
+
+.section h6 span {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  color: #444;
+}
+
+.section h6 {
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.center-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.link {
+  color: #ff6d00;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: #e65100;
+}
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario: Enviar un Paquete</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header style="padding: 1rem 2rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+  
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <img th:src="@{/images/logoexpress.jpg}" alt="Logo" style="height: 40px;">
+    <h1 style="color: #ff6d00; font-size: 1.5rem;">PackExpress</h1>
+  </div>
+  <nav>
+    <a th:href="@{/}" style="margin-right: 1rem; text-decoration: none; color: #333;">Inicio</a>
+    <a th:href="@{/servicios}" style="margin-right: 1rem; text-decoration: none; color: #333;">Servicios</a>
+    
+
+  </nav>
+</header>
+
+<main>
+  <form id="form-pedido">
+    <section class="form-section">
+      <div class="form-column">
+        <h3>Datos del remitente</h3>
+        <input type="text" name="remitenteNombre" placeholder="Nombre" required>
+        <input type="tel" name="remitenteTelefono" placeholder="Teléfono" required>
+        <label>¿Deseas asegurar el paquete?</label>
+        <input type="checkbox" name="asegurar"> No<br>
+        <button type="button" class="btn">Calcular tarifa</button>
+      </div>
+
+      <div class="form-column">
+        <h3>Datos del destinatario</h3>
+        <input type="text" name="destinatarioNombre" placeholder="Nombre" required>
+        <input type="tel" name="destinatarioTelefono" placeholder="Teléfono" required>
+        <label>¿Deseas reprogramar la entrega luego?</label>
+        <input type="checkbox" name="reprogramar"> No<br>
+        <button type="submit" class="btn">Confirmar envío</button>
+      </div>
+    </section>
+  </form>
+</main>
+<br>
+
+<a th:href="@{/}" class="btn" style="background-color: #ff6d00;">🏠 Volver al inicio</a>
+
+<script>
+  document.getElementById("form-pedido").addEventListener("submit", function(event) {
+    event.preventDefault();
+    alert("Envío confirmado correctamente.");
+    this.reset(); // limpia automáticamente todos los campos del formulario
+  });
+</script>
+
+</body>
+</html>

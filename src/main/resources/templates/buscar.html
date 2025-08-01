@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultados de búsqueda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header style="text-align: center; padding: 1rem;">
+  <h2>Resultados de búsqueda</h2>
+
+  <div th:if="${consulta}">
+    <p>Buscaste: <strong th:text="${consulta}">[consulta]</strong></p>
+  </div>
+</header>
+
+<main style="padding: 2rem; max-width: 700px; margin: auto;">
+  <div th:if="${consulta == null or #strings.isEmpty(consulta)}" style="color: red;">
+    <p>⚠️ No se puede realizar una búsqueda vacía. Ingresa un término válido.</p>
+  </div>
+
+  <div th:if="${resultados != null and !#lists.isEmpty(resultados)}">
+    <h3>🔎 Resultados encontrados:</h3>
+    <ul style="list-style: none; padding-left: 0;">
+      <li th:each="item : ${resultados}" style="margin-bottom: 1rem; padding: 1rem; border: 1px solid #ccc; border-radius: 5px;">
+        <strong>Cliente:</strong> <span th:text="${item.cliente}"></span><br>
+        <strong>Dirección:</strong> <span th:text="${item.direccion}"></span><br>
+        <strong>Contenido:</strong> <span th:text="${item.contenido}"></span><br>
+        <strong>Valor:</strong> $<span th:text="${item.valor}"></span><br>
+        <strong>Estado:</strong> <span th:text="${item.estado}"></span><br>
+        <strong>Fecha entrega:</strong> <span th:text="${item.fechaEntrega}"></span>
+      </li>
+    </ul>
+  </div>
+
+  <div th:if="${resultados != null and #lists.isEmpty(resultados)}">
+    <p>❌ No se encontraron resultados para "<span th:text="${consulta}"></span>".</p>
+  </div>
+</main>
+<br>
+<button class="btn cerrar-btn" onclick="cerrarModal()">❌ Cancelar</button>
+<a th:href="@{/}" class="btn" style="background-color: red;">🏠 Volver al inicio</a>
+
+<footer style="text-align: center; padding: 1rem; margin-top: 2rem;">
+  <p>&copy; 2025 PackExpress</p>
+</footer>
+
+</body>
+</html>

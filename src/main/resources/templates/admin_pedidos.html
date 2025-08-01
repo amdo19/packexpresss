@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Administración | PackExpress</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <main class="formulario">
+    <h1>Listado de Pedidos</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Cliente</th><th>Contenido</th><th>Entrega</th><th>Estado</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="pedido : ${pedidos}">
+          <td th:text="${pedido.id}"></td>
+          <td th:text="${pedido.cliente}"></td>
+          <td th:text="${pedido.contenido}"></td>
+          <td th:text="${pedido.fechaEntrega}"></td>
+          <td th:text="${pedido.estado}"></td>
+          <td>
+            <form th:action="@{/admin/cambiarEstado}" method="post">
+              <input type="hidden" name="id" th:value="${pedido.id}" />
+              <select name="estado">
+                <option>Pendiente</option>
+                <option>En camino</option>
+                <option>Entregado</option>
+                <option>Reprogramado</option>
+              </select>
+              <button type="submit">Actualizar</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+      <br>
+<a th:href="@{/}" class="btn" style="background-color: red;">🏠 Volver al inicio</a>
+
+    </table>
+  </main>
+  <div th:replace="fragmentos/footer :: pie"></div>
+</body>
+</html>

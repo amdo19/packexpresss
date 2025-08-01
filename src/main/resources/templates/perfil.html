@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - Historial de Pedidos</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <style>
+    .historial-container {
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .pedido-card {
+      background-color: #fff3e0;
+      border: 1px solid #ffcc80;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pedido-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    .pedido-header {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .pedido-acciones a {
+      background-color: #ff6d00;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      margin-right: 0.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+    .pedido-acciones a:hover {
+      background-color: #e65100;
+    }
+  </style>
+</head>
+<body>
+<header class="header-principal">
+  <div class="logo-box">
+    <img th:src="@{/images/logoexpress.jpg}" alt="Logo" style="height: 40px;">
+    <h1 style="color: #ff6d00; font-size: 1.5rem;">PackExpress</h1>
+  </div>
+  <nav>
+    <a th:href="@{/}" class="btn">Inicio</a>
+    <a th:href="@{/logout}" class="btn">Cerrar sesión</a>
+  </nav>
+</header>
+
+<main class="historial-container">
+  <h2>Hola <span th:text="${usuario.nombre}"></span>, este es tu historial de pedidos</h2>
+
+  <div th:if="${#lists.isEmpty(pedidos)}">
+    <p>No tienes pedidos registrados aún.</p>
+  </div>
+
+  <div th:each="pedido : ${pedidos}" class="pedido-card">
+    <div class="pedido-header">
+      <strong>Pedido:</strong> <span th:text="${pedido.id}"></span>
+      <span style="float: right;"><strong>Estado:</strong> <span th:text="${pedido.estado}"></span></span>
+    </div>
+    <p><strong>Dirección:</strong> <span th:text="${pedido.direccion}"></span></p>
+    <p><strong>Contenido:</strong> <span th:text="${pedido.contenido}"></span></p>
+    <p><strong>Valor:</strong> $<span th:text="${pedido.valor}"></span></p>
+    <p><strong>Fecha entrega:</strong> <span th:text="${pedido.fechaEntrega}"></span></p>
+
+    <div class="pedido-acciones">
+      <a th:href="@{'/seguimiento?id=' + ${pedido.id}}">Ver seguimiento</a>
+      <a th:href="@{'/pedido/reprogramar?id=' + ${pedido.id}}">Reprogramar</a>
+      <a href="#">Calificar servicio</a>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

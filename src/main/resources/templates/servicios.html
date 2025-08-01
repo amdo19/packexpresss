@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios | PackExpress</title>
+  <link rel="stylesheet" th:href="@{/css/servicios.css}">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-box">
+    <img th:src="@{/images/logoexpress.jpg}" alt="PackExpress" class="logo-img">
+    <h1 class="logo-title">Pack<span>Express</span></h1>
+  </div>
+  <nav class="nav">
+    <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/servicios}" class="active">Servicios</a>
+    <a th:if="${pedido != null}" th:href="@{'/seguimiento?id=' + ${pedido.id}}">Ver seguimiento</a>
+
+
+  </nav>
+</header>
+
+<main class="main-content">
+  <h2>Nuestros Servicios</h2>
+  <div class="cards">
+    <div class="card">
+      <img th:src="@{/images/servicio1.jpg}" alt="Envíos rurales" class="card-img">
+      <h3>Envíos Rurales</h3>
+      <p>Entregamos en zonas de difícil acceso con rapidez y seguridad.</p>
+    </div>
+
+    <div class="card">
+      <img th:src="@{/images/servicio2.jpg}" alt="Seguro de envío" class="card-img">
+      <h3>Seguro de Envío</h3>
+      <p>Protege tu pedido contra pérdidas o daños durante el transporte.</p>
+    </div>
+
+    <div class="card">
+      <img th:src="@{/images/servicio3.jpg}" alt="Atención personalizada" class="card-img">
+      <h3>Atención Personalizada</h3>
+      <p>Soporte directo por WhatsApp para ayudarte en todo momento.</p>
+    </div>
+
+    <div class="card">
+      <img th:src="@{/images/servicio4.jpg}" alt="Reprogramación" class="card-img">
+      <h3>Reprogramación</h3>
+      <p>Cambia la fecha de entrega de tu pedido si lo necesitas.</p>
+    </div>
+  </div>
+</main>
+<br>
+<a th:href="@{/}" class="btn" style="background-color: #ff6d00;">🏠 Volver al inicio</a>
+
+<footer class="footer">
+  <p>&copy; 2025 PackExpress | Tu pedido en tus manos</p>
+</footer>
+
+<script th:src="@{/js/servicios.js}"></script>
+</body>
+</html>

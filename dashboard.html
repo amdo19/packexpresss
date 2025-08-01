@@ -1,0 +1,105 @@
+<!-- dashboard.html renovado estilo tipo PedidosYa con temática Temu extendido -->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PackExpress | Tu pedido en tus manos</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <header class="header-principal" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img th:src="@{/images/logoexpress.jpg}" alt="Logo PackExpress" style="height: 50px;">
+      <h1 style="color: #ff6d00; font-size: 1.5rem;">PackExpress</h1>
+    </div>
+    <div>
+      <input type="text" placeholder="Buscar servicios o entregas..." style="padding: 0.5rem 1rem; border-radius: 999px; border: 1px solid #ddd;">
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <a href="#" style="color: #333; text-decoration: none; font-weight: 600;">Mi Perfil</a>
+    </div>
+  </header>
+
+  <main style="padding: 2rem; max-width: 1300px; margin: 0 auto;">
+    <!-- Secciones anteriores omitidas para brevedad -->
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">¿Por qué elegir PackExpress?</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li>✅ Entregas rápidas en zonas rurales y urbanas.</li>
+        <li>✅ Seguro en cada pedido.</li>
+        <li>✅ Atención personalizada por WhatsApp.</li>
+        <li>✅ Seguimiento en tiempo real.</li>
+        <li>✅ Integración con comercios Temu.</li>
+      </ul>
+    </section>
+
+    <section style="margin-top: 3rem; background: #f9f9f9; padding: 2rem; border-radius: 1rem;">
+      <h3 class="section-title">Opiniones recientes</h3>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div style="flex:1; min-width:250px; background:white; padding:1rem; border-radius: 0.5rem; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+          <p>⭐⭐⭐⭐⭐</p>
+          <p>"Increíble servicio, llegó antes de lo prometido."</p>
+          <p><strong>– Karla S.</strong></p>
+        </div>
+        <div style="flex:1; min-width:250px; background:white; padding:1rem; border-radius: 0.5rem; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+          <p>⭐⭐⭐⭐</p>
+          <p>"Muy buena atención al cliente, volveré a usarlo."</p>
+          <p><strong>– Andrés P.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Preguntas frecuentes</h3>
+      <details>
+        <summary>¿Qué zonas cubre PackExpress?</summary>
+        <p>Cubrimos todo Ecuador, especialmente zonas rurales donde otros no llegan.</p>
+      </details>
+      <details>
+        <summary>¿Puedo reprogramar un pedido?</summary>
+        <p>Sí, desde el panel de seguimiento puedes hacerlo fácilmente.</p>
+      </details>
+      <details>
+        <summary>¿Cómo me comunico con atención al cliente?</summary>
+        <p>Haz clic en el botón de WhatsApp que flota en la esquina inferior derecha.</p>
+      </details>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Ubicación</h3>
+      <div style="width:100%;height:300px;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Estadísticas</h3>
+      <ul>
+        <li>📦 Pedidos entregados este mes: <strong>892</strong></li>
+        <li>🚚 Cobertura activa: <strong>92 zonas</strong></li>
+        <li>⭐ Valoración promedio: <strong>4.8 / 5</strong></li>
+      </ul>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h3 class="section-title">Enlaces útiles</h3>
+      <ul style="display: flex; gap: 1rem; flex-wrap: wrap; list-style: none;">
+        <li><a th:href="@{/pedido/nuevo}" class="btn">Solicitar Pedido</a></li>
+        <li><a th:href="@{/seguimiento?id=1}" class="btn">Ver Seguimiento</a></li>
+        <li><a th:href="@{/admin/pedidos}" class="btn">Panel de Gestión</a></li>
+        <li><a href="mailto:info@packexpress.com" class="btn">Contáctanos</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/593999999999?text=Hola%20PackExpress,%20quiero%20información" class="whatsapp-float" target="_blank" title="Habla con soporte">
+    <img th:src="@{/images/whatsapp.png}" alt="WhatsApp">
+  </a>
+
+  <footer class="footer-temu" th:replace="fragmentos/footer :: pie"></footer>
+  <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

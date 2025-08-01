@@ -1,0 +1,57 @@
+<section style="padding: 2rem;">
+  <h3 style="font-size: 1.8rem; color: #ff6d00; margin-bottom: 1rem;">📦 Historial de pedidos</h3>
+
+  <div th:if="${pedidos != null and !pedidos.isEmpty()}" th:each="pedido : ${pedidos}" class="fade-in"
+       style="border: 1px solid #ddd; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.3s ease; margin-bottom: 1.5rem;">
+    
+    <p style="font-size: 1.1rem;">
+      <strong>N.º de pedido:</strong> <span th:text="${pedido.id}">123456</span><br>
+      <strong>Cliente:</strong> <span th:text="${pedido.cliente}">Nombre Cliente</span>
+      <span style="float: right; color: #007bff; font-weight: bold;" th:text="${pedido.estado}">🚚 En ruta</span>
+    </p>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 1.5rem; flex-wrap: wrap; gap: 10px;">
+      <a th:href="@{/factura/{id}(id=${pedido.id})}" class="btn-accion">📥 Descargar factura</a>
+      <a th:href="@{/pedido/nuevo}" class="btn-accion">🔁 Volver a enviar</a>
+      <a th:href="@{/seguimiento?id={id}(id=${pedido.id})}" class="btn-accion">📅 Reprogramar</a>
+      <a href="#" class="btn-accion">⭐ Calificar servicio</a>
+    </div>
+  </div>
+
+  <!-- Si no hay pedidos -->
+  <div th:if="${pedidos == null or pedidos.isEmpty()}" style="text-align: center; margin-top: 2rem;">
+    <p style="font-size: 1.1rem; color: #777;">⚠️ Aún no tienes pedidos registrados.</p>
+  </div>
+</section>
+
+<style>
+  .btn-accion {
+    background-color: #ff6d00;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-accion:hover {
+    background-color: #e85e00;
+    transform: scale(1.03);
+  }
+
+  .fade-in {
+    animation: fadeInUp 0.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
